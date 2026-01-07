@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Percent Is Enough, Semi-Supervised Martian Segmentation Labeling with Active Learning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+        displayMath: [ ['$$', '$$'], ['\\[', '\\]'] ],
+        processEscapes: true, 
+        tags: 'all',
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script
+    type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+  </script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Three Percent Is Enough, Semi-Supervised Martian Segmentation Labeling with Active Learning</h1>
+          
+
+          
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              
+              <span class="link-block">
+                <a href="https://www.cs.virginia.edu/~robins/Turing_Paper_1936.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              
+              <!-- Video Link. -->
+              
+              <!-- Code Link. -->
+              
+              <span class="link-block">
+                <a href="https://github.com/topics/turing-machines"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              
+              <!-- Dataset Link. -->
+              
+              <span class="link-block">
+                <a href="https://huggingface.co/docs/datasets"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-database"></i>
+                  </span>
+                  <span>Data</span>
+                </a>
+              </span>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+<div class="container is-max-desktop">
+
+<div class="content">
+  <!-- Using HTML to center the abstract -->
+<div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+        <h2>Abstract</h2>
+        <div class="content has-text-justified">
+Accurate and large-scale Martian segmentation
+datasets are the cornerstone for scientific tasks such as ex-
+ploration and navigation in the Martian environment. The
+current released real-world Martian segmentation datasets are
+(in thousand scale and) processed through manual annotation.
+However, high-quality segmentation labeling on planetary images
+require annotators to have professional extraterrestrial geological
+knowledge, and even skilled annotators need a long time to
+label a single image in detail. In this paper, we propose a semi-
+automatic annotation method for the Mars scene segmentation
+task. By integrating a semi-supervised segmentation network
+architecture with an active learning strategy, our framework
+achieves near-fully supervised performance using a minimal
+amount of manual annotations, significantly reducing dependence
+on human experts. Experiments on S$^5$Mars datasets show that
+our framework reaches 95.73% of the accuracy of the official
+model trained on 5000 labeled images, while requiring only
+3.38% of the manual annotations (169 images), demonstrating a
+substantial improvement in label efficiency. Meanwhile, due to the
+integration of deep learning, our method can update constantly
+to generate new images of Mars scenes for quick new dataset
+construction.
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2 id="purpose">Purpose</h2>
+<p>We propose an efficient semi-automatic framework for the Martian segmentation labeling task,aim to leverage a very small amount
+of manually labeled images to generate tens of thousands of high-quality labels, supporting future Mars exploration and scientific research</p>
+
+<h2 id="contribution">Contribution</h2>
+<ol>
+  <li>A iterative open-sourced framework combined with sem-supervised learning and active query strategy is developed to produce large-scale Martian segmentation dataset with mini-mize human expert labeling effort</li>
+  <li>A CPS-Mars architecture based on cross pseudo supervision (CPS)  is proposed to for SSL with self-defined loss function dealing with inter-class imbalance problem in Mars scene dataset.</li>
+  <li>Performance of our framework with optimized modules and strategies reaches 95.73% accuracy on labeling S$^5$Mars segmentation dataset with only nearly 3% of manually labeled images.</li>
+</ol>
+
+<h2 id="frmework">frmework</h2>
+<p>We combined the idea of semi-supervision with active learning and designed a semi-supervised active learning framework. Train a semi-supervised model driven by an extremely small amount of data. Based on the performance of unlabeled data on the semi-supervised model, we use the active learning query method we designed to query the data with the greatest labeling value for manual labeling. Finally, the labeled data is integrated with the labeled data and then input into the semi-supervised learning model. Repeat this process until the user’s needs are met</p>
+
+<p><img src="/static/image/SSL2.png" alt="Turing Machine" />
+*Figure 1: Semi-supervised active learning framework for Mars segmentation labeling.</p>
+<h2 id="ssl-architecture">SSL architecture</h2>
+<p>Our SSL architecture is based on a dual-branch structure. For the special Mars scenario, we have designed a special supervised loss function.</p>
+
+<p><img src="/static/image/CPSnew.png" alt="Turing Machine" />
+*Figure 2: Semi-supervised learning architecture for Mars scene segmentation.</p>
+<h2 id="table-segmentation-performance-of-ssl-architectures-and-active-query-methods-on-s5mars-dataset-using-169-labeled-images-out-of-5400-total">Table: Segmentation performance of SSL architectures and active query methods on S$^5$Mars dataset (Using 169 Labeled Images out of 5400 Total)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>SSL architecture</th>
+      <th>Active query strategy</th>
+      <th>Query frequencies</th>
+      <th>mIoU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>Ramdom</td>
+      <td>1</td>
+      <td>66.55</td>
+    </tr>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>BALD</td>
+      <td>1</td>
+      <td>70.76</td>
+    </tr>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>Uncertainty</td>
+      <td>1</td>
+      <td>71.24</td>
+    </tr>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>Entropy</td>
+      <td>1</td>
+      <td>73.82</td>
+    </tr>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>UEQ(Ours)</td>
+      <td>1</td>
+      <td>75.00</td>
+    </tr>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>UEQ(Ours)</td>
+      <td>2</td>
+      <td>75.13</td>
+    </tr>
+    <tr>
+      <td>CPS-Mars</td>
+      <td>UEQ(Ours)</td>
+      <td>4</td>
+      <td>76.73</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+</div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> and <a href="https://github.com/shunzh/project_website">the Jekyll fork</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
